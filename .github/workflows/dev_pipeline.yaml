@@ -5,7 +5,7 @@ on:
 
 env:
     SERVICE_NAME: ct-backend-service
-    CLUSTER_NAME: pythonbackend
+    CLUSTER_NAME: testecs
     CONTAINER_NAME: pythonbackend
     TASK_DEFINITION: pythonbackend
 
