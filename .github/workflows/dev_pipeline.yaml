@@ -38,11 +38,11 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                 push: true
-                tags: ${{ vars.DEV_IMAGE_REPO }}:v1
+                tags: ${{ vars.DEV_IMAGE_REPO }}:v2
             
             - name: Publish Pushed Image Version
               id: image_version
-              run: echo "version=v1" >> "$GITHUB_OUTPUT"
+              run: echo "version=v2" >> "$GITHUB_OUTPUT"
     deploy:
         needs: build
         runs-on: ubuntu-latest
