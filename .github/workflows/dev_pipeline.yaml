@@ -38,11 +38,11 @@ jobs:
               uses: docker/build-push-action@v4
               with:
                 push: true
-                tags: ${{ vars.DEV_IMAGE_REPO }}:latest
+                tags: ${{ vars.DEV_IMAGE_REPO }}:v1
             
             - name: Publish Pushed Image Version
               id: image_version
-              run: echo "version=latest" >> "$GITHUB_OUTPUT"
+              run: echo "version=v1" >> "$GITHUB_OUTPUT"
     deploy:
         needs: build
         runs-on: ubuntu-latest
@@ -65,10 +65,6 @@ jobs:
                 task-definition: task-definition.json
                 container-name: ${{ env.CONTAINER_NAME }}
                 image: "${{ vars.DEV_IMAGE_REPO }}:${{ needs.build.outputs.image_version }}"
-
-            - name: Get task definition revision
-              run: | 
-                echo "Task definition revision: ${{ steps.task-def.outputs.task-definition-revision }}"
         
             - name: Deploy Amazon ECS task definition
               uses: aws-actions/amazon-ecs-deploy-task-definition@v1
