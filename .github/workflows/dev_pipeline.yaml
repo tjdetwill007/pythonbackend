@@ -6,7 +6,7 @@ on:
 env:
     SERVICE_NAME: ct-backend-service
     CLUSTER_NAME: pythonbackend
-    CONTAINER_NAME: ct-backend
+    CONTAINER_NAME: pythonbackend
     TASK_DEFINITION: pythonbackend
 
 jobs:
