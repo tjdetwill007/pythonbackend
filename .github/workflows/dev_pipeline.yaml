@@ -12,6 +12,9 @@ env:
 jobs:
     build:
         runs-on: ubuntu-latest
+        
+        outputs:
+            tagged_image: ${{ steps.docker_image.outputs.imageid }}
 
         steps:
             - name: Checkout Code
@@ -50,7 +53,7 @@ jobs:
             - name: Download task definition
               run: |
                 aws ecs describe-task-definition --task-definition ${{ env.TASK_DEFINITION }} --query taskDefinition > task-definition.json
-                echo "image_id is : ${{ jobs.build.outputs.imageid }}"
+                echo "image_id is : ${{needs.build.outputs.tagged_image}}"
             - name: Update ECS task definition Image Name
               id: task-def
               uses: aws-actions/amazon-ecs-render-task-definition@v1
