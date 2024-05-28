@@ -4,7 +4,7 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-@app.route('/'):
+@app.route('/')
 def root_api():
     return {"statuscode":200, "body":"Hello from root api call"}
 @app.route('/api/v1/greet')
