@@ -33,7 +33,7 @@ jobs:
             - name: Get and Update Image version
               id: app_version
               run: |
-                latest_tag=$(aws ecr describe-images --repository-name ${{ env.REPO_NAME }} --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' --output text --profile me)
+                latest_tag=$(aws ecr describe-images --repository-name ${{ env.REPO_NAME }} --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' --output text)
                 if [ -z "$latest_tag" -o "$latest_tag" == "" -o "$latest_tag" == "latest" ]; then
                     version=1 
                     echo "version=$version" >> "$GITHUB_OUTPUT"
