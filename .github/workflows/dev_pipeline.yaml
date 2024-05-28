@@ -8,7 +8,7 @@ env:
     CLUSTER_NAME: testecs
     CONTAINER_NAME: pythonbackend
     TASK_DEFINITION: pythonbackend
-    
+    REPO_NAME: testpython
 
 jobs:
     build:
@@ -33,7 +33,7 @@ jobs:
             - name: Get and Update Image version
               id: app_version
               run: |
-                latest_tag=$(aws ecr describe-images --repository-name $REPO_NAME --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' --output text --profile me)
+                latest_tag=$(aws ecr describe-images --repository-name ${{ env.REPO_NAME }} --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' --output text --profile me)
                 if [ -z "$latest_tag" -o "$latest_tag" == "" -o "$latest_tag" == "latest" ]; then
                     version=1 
                     echo "version=$version" >> "$GITHUB_OUTPUT"
@@ -43,8 +43,8 @@ jobs:
                     version=$last_version
                     echo "version=$version" >> "$GITHUB_OUTPUT"
                 fi
-              env:
-                REPO_NAME: testpython
+            
+                
              
 
             - name: Login to Amazon ECR
