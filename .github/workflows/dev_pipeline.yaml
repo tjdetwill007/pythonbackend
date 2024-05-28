@@ -65,7 +65,11 @@ jobs:
                 task-definition: task-definition.json
                 container-name: ${{ env.CONTAINER_NAME }}
                 image: "${{ vars.DEV_IMAGE_REPO }}:${{ needs.build.outputs.image_version }}"
-      
+
+            - name: Get task definition revision
+              run: | 
+                echo "Task definition revision: ${{ steps.task-def.outputs.task-definition-revision }}"
+        
             - name: Deploy Amazon ECS task definition
               uses: aws-actions/amazon-ecs-deploy-task-definition@v1
               with:
