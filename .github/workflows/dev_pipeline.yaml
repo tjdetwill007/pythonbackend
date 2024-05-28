@@ -50,7 +50,7 @@ jobs:
             - name: Download task definition
               run: |
                 aws ecs describe-task-definition --task-definition ${{ env.TASK_DEFINITION }} --query taskDefinition > task-definition.json
-                echo "image_id is : ${{ steps.docker_image.outputs.imageid }}"
+                echo "image_id is : ${{ jobs.build.outputs.imageid }}"
             - name: Update ECS task definition Image Name
               id: task-def
               uses: aws-actions/amazon-ecs-render-task-definition@v1
