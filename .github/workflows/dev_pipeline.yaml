@@ -43,10 +43,7 @@ jobs:
                     version=$last_version
                     echo "version=$version" >> "$GITHUB_OUTPUT"
                 fi
-            
-                
-             
-
+                   
             - name: Login to Amazon ECR
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
